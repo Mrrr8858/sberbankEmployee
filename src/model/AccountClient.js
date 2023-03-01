@@ -1,5 +1,4 @@
-//users class
-export default class User {
+export default class AccountClient {
     //public
     name;
 

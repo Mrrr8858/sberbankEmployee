@@ -1,5 +1,4 @@
-//users class
-export default class User {
+export default class Credit {
     //public
     name;
 

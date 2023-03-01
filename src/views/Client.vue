@@ -32,5 +32,8 @@ export default {
             ],
         };
     },
+    mounted() {
+        this.$store.dispatch("client/getClientsList");
+    },
 };
 </script>
