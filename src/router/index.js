@@ -1,16 +1,26 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Clients from "@/views/Client.vue";
+import Users from "@/views/Users.vue";
 
 const routes = [
     {
-        path: "/clients",
-        name: "home",
-        component: Clients,
+        path: "/users",
+        name: "users",
+        component: Users,
     },
     {
         path: "/credits",
         name: "credits",
         component: () => import("@/views/Credits.vue"),
+    },
+    {
+        path: "/users/create",
+        name: "createNewUser",
+        component: () => import("@/components/user/createNewUser.vue"),
+    },
+    {
+        path: "/client/account/:id",
+        name: "createNewUser",
+        component: () => import("@/components/client/clientsAccount.vue"),
     },
 ];
 

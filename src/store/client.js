@@ -17,7 +17,7 @@ export default {
     },
 
     actions: {
-        async getClientList(context) {
+        async getClientsList(context) {
             context.commit("setClientList", await api.client.getClientsList());
         },
         async getClientsAccount(context, payload) {

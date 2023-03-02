@@ -1,6 +1,8 @@
+import axios from "axios";
+
 const endpoints = {
     client: {
-        getClientsList: "",
+        getClientsList: "https://api.coindesk.com/v1/bpi/currentprice.json",
         getClientsAccount: "",
         getAccountHistory: "",
     },
@@ -14,32 +16,71 @@ const endpoints = {
     user: {
         createNewUser: "",
         blockUser: "",
+        getUsersRole: "",
     },
 };
 
 export default {
     client: {
-        getClientsList: () => {
-            endpoints.client.getClientsList;
-        }, //get
-        getClientsAccount: () => {
-            //payload
-            endpoints.client.getClientsAccount;
-        }, //post
-        getAccountHistory: () => {
-            //payload
-            endpoints.client.getAccountHistory;
-        }, //post
+        //get
+        getClientsList: () =>
+            axios
+                .get(endpoints.client.getClientsList)
+                .then((response) => response.data)
+                .catch((error) => console.log(error)),
+        //post
+        getClientsAccount: (payload) =>
+            axios
+                .post(endpoints.client.getClientsAccount, payload)
+                .then((response) => response.data)
+                .catch((error) => console.log(error)),
+        //post
+        getAccountHistory: (payload) =>
+            axios
+                .post(endpoints.client.getAccountHistory, payload)
+                .then((response) => response.data)
+                .catch((error) => console.log(error)),
     },
     employees: {
-        getEmployeesList: () => {}, //get
+        //get
+        getEmployeesList: () =>
+            axios
+                .get(endpoints.employees.getEmployeesList)
+                .then((response) => response.data)
+                .catch((error) => console.log(error)),
     },
     credits: {
-        getCredit: () => {}, //get
-        createNewCreditRate: () => {}, //post //payload
+        //get
+        getCredit: () =>
+            axios
+                .get(endpoints.credits.getCredit)
+                .then((response) => response.data)
+                .catch((error) => console.log(error)),
+        //post
+        createNewCreditRate: (payload) =>
+            axios
+                .post(endpoints.credits.createNewCreditRate, payload)
+                .then((response) => response.data)
+                .catch((error) => console.log(error)),
     },
     user: {
-        createNewUser: () => {}, //post //payload
-        blockUser: () => {}, //post //payload
+        //post
+        createNewUser: (payload) =>
+            axios
+                .post(endpoints.user.createNewUser, payload)
+                .then((response) => response.data)
+                .catch((error) => console.log(error)),
+        //post
+        blockUser: (payload) =>
+            axios
+                .post(endpoints.user.blockUser, payload)
+                .then((response) => response.data)
+                .catch((error) => console.log(error)),
+        //get
+        getUsersRole: () =>
+            axios
+                .get(endpoints.user.getUsersRole)
+                .then((response) => response.data)
+                .catch((error) => console.log(error)),
     },
 };

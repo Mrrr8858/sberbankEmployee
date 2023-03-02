@@ -32,7 +32,7 @@ export default {
             items: [
                 {
                     title: "Пользователи",
-                    route: "/clients",
+                    route: "/users",
                 },
                 {
                     title: "Кредиты",

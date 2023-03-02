@@ -2,9 +2,15 @@ import api from "./api";
 
 export default {
     namespaced: true,
-    state: {},
+    state: {
+        roles: [],
+    },
 
-    mutations: {},
+    mutations: {
+        setUsersRole(state, data) {
+            state.roles = data;
+        },
+    },
 
     actions: {
         async createNewUser(context, payload) {
@@ -12,6 +18,9 @@ export default {
         },
         async blockUser(context, payload) {
             await api.user.blockUser(payload);
+        },
+        async getUsersRole(context, payload) {
+            await api.user.getUsersRole(payload);
         },
     },
 };
