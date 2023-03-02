@@ -1,7 +1,7 @@
 <template>
     <v-card>
         <v-card-title> Создать пользователя </v-card-title>
-        <v-card-text>
+        <v-card-text class="mt-2">
             <v-text-field
                 v-model="name"
                 :counter="10"
@@ -24,7 +24,13 @@
                 label="Роль"
             ></v-autocomplete>
 
-            <v-btn @click="create"> Создать </v-btn>
+            <v-btn
+                @click="create"
+                class="mr-2"
+                :disabled="!name || !phone || !email || !selectedRole"
+            >
+                Создать
+            </v-btn>
 
             <v-btn @click="clear"> Очистить </v-btn>
         </v-card-text>

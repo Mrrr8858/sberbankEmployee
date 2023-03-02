@@ -13,6 +13,11 @@ const routes = [
         component: () => import("@/views/Credits.vue"),
     },
     {
+        path: "/credits/create",
+        name: "createNewCreditRate",
+        component: () => import("@/components/credits/createNewCreditRate.vue"),
+    },
+    {
         path: "/users/create",
         name: "createNewUser",
         component: () => import("@/components/user/createNewUser.vue"),

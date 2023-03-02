@@ -1,7 +1,9 @@
 <template>
     <v-card>
         <v-card-title>
-            <v-btn @click="createNewUser">
+            Список пользователей
+            <v-spacer></v-spacer>
+            <v-btn @click="createNewUser" class="my-2">
                 Создать пользователя
             </v-btn></v-card-title
         >
