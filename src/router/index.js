@@ -19,8 +19,13 @@ const routes = [
     },
     {
         path: "/client/account/:id",
-        name: "createNewUser",
+        name: "clientsAccount",
         component: () => import("@/components/client/clientsAccount.vue"),
+    },
+    {
+        path: "/client/account/history/:id",
+        name: "accountsHistory",
+        component: () => import("@/components/client/accountsHistory.vue"),
     },
 ];
 
