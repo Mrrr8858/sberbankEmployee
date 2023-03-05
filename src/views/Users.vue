@@ -16,7 +16,10 @@
             <v-window v-model="tab">
                 <v-window-item value="clients">
                     <v-list>
-                        <v-list-item v-for="item in clients" :key="item.index">
+                        <v-list-item
+                            v-for="item in clientsList"
+                            :key="item.index"
+                        >
                             <v-list-item-title>
                                 {{ item.name }} {{ item.surname }}
                             </v-list-item-title>
@@ -38,7 +41,10 @@
 
                 <v-window-item value="employee">
                     <v-list>
-                        <v-list-item v-for="item in employee" :key="item.index">
+                        <v-list-item
+                            v-for="item in employeesList"
+                            :key="item.index"
+                        >
                             <v-list-item-title>
                                 {{ item.name }}
                                 {{ item.surname }} </v-list-item-title
@@ -64,46 +70,6 @@ export default {
     data() {
         return {
             tab: null,
-            clients: [
-                {
-                    id: 1,
-                    name: "Liza",
-                    surname: "QQQ",
-                    phone: 123,
-                },
-                {
-                    id: 2,
-                    name: "Ilya",
-                    surname: "QQQ",
-                    phone: 123,
-                },
-                {
-                    id: 3,
-                    name: "Ira",
-                    surname: "QQQ",
-                    phone: 123,
-                },
-            ],
-            employee: [
-                {
-                    id: 1,
-                    name: "Лиза",
-                    surname: "QQQ",
-                    phone: 123,
-                },
-                {
-                    id: 2,
-                    name: "Илья",
-                    surname: "QQQ",
-                    phone: 123,
-                },
-                {
-                    id: 3,
-                    name: "Ира",
-                    surname: "QQQ",
-                    phone: 123,
-                },
-            ],
         };
     },
     methods: {
@@ -118,12 +84,19 @@ export default {
             });
         },
         blockUser(id) {
-            console.log(id);
-            //this.$store.dispatch("user/blockUser", { id: id });
+            this.$store.dispatch("user/blockUser", Number(id));
         },
     },
-    mounted() {
-        this.$store.dispatch("client/getClientsList");
+    computed: {
+        clientsList() {
+            return this.$store.state.user.clientsList;
+        },
+        employeesList() {
+            return this.$store.state.user.employeesList;
+        },
+    },
+    async mounted() {
+        await this.$store.dispatch("user/getUsersList");
     },
 };
 </script>

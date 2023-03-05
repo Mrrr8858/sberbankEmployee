@@ -2,19 +2,11 @@
     <v-card>
         <v-card-title> Создать пользователя </v-card-title>
         <v-card-text class="mt-2">
-            <v-text-field
-                v-model="name"
-                :counter="10"
-                label="Имя"
-            ></v-text-field>
+            <v-text-field v-model="name" label="Имя"></v-text-field>
 
-            <v-text-field
-                v-model="phone"
-                :counter="11"
-                label="Телефон"
-            ></v-text-field>
+            <v-text-field v-model="surname" label="Фамилия"></v-text-field>
 
-            <v-text-field v-model="email" label="E-mail"></v-text-field>
+            <v-text-field v-model="login" label="Login"></v-text-field>
 
             <v-autocomplete
                 v-model="selectedRole"
@@ -27,7 +19,7 @@
             <v-btn
                 @click="create"
                 class="mr-2"
-                :disabled="!name || !phone || !email || !selectedRole"
+                :disabled="!name || !surname || !login || !selectedRole"
             >
                 Создать
             </v-btn>
@@ -44,9 +36,9 @@ export default {
     data() {
         return {
             selectedRole: null,
-            email: "",
+            surname: "",
             name: "",
-            phone: "",
+            login: "",
             roles: [
                 {
                     id: 1,
@@ -62,22 +54,25 @@ export default {
     methods: {
         clear() {
             (this.selectedRole = null),
-                (this.email = ""),
+                (this.surname = ""),
                 (this.name = ""),
-                (this.phone = "");
+                (this.login = "");
         },
-        create() {
+        async create() {
             const payload = {
                 name: this.name,
-                email: this.email,
-                phone: this.phone,
+                surname: this.surname,
+                login: this.login,
                 roleId: this.selectedRole,
             };
-            console.log(payload);
+            await this.$store.dispatch("user/createNewUser", payload);
+            this.$router.push({
+                path: `/users`,
+            });
         },
     },
     mounted() {
-        //this.$store.dispatch("user/getUsersRole");
+        this.$store.dispatch("user/getUsersRole");
     },
 };
 </script>

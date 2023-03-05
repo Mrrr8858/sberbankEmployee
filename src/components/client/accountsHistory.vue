@@ -1,6 +1,6 @@
 <template>
     <v-card>
-        <v-card-title>История счета {{ number }}</v-card-title>
+        <v-card-title>История счета №{{ numberAccount }}</v-card-title>
 
         <v-card-text>
             <v-table>
@@ -11,9 +11,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in accounts" :key="item.name">
-                        <td>{{ item.date }}</td>
-                        <td>{{ item.operation }}</td>
+                    <tr v-for="item in historyList" :key="item.id">
+                        <td>{{ item.formateDate(item.date) }}</td>
+                        <td>{{ item.operation + item.amount }}</td>
                     </tr>
                 </tbody>
             </v-table>
@@ -47,8 +47,16 @@ export default {
         };
     },
     methods: {},
+    computed: {
+        historyList() {
+            return this.$store.state.client.accountHistory.history;
+        },
+        numberAccount() {
+            return this.$store.state.client.accountHistory.accountNumber;
+        },
+    },
     mounted() {
-        //
+        this.$store.dispatch("client/getAccountHistory", this.$route.params.id);
     },
 };
 </script>

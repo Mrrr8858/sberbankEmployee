@@ -1,8 +1,12 @@
 export default class AccountClient {
     //public
-    name;
+    number;
+    id;
+    balance;
 
     constructor(row) {
-        this.name = row.name;
+        this.number = row.number;
+        this.id = row.id;
+        this.balance = row.amount;
     }
 }

@@ -9,10 +9,10 @@
         </v-card-title>
         <v-card-text>
             <v-list>
-                <v-list-item v-for="(rate, index) in rates" :key="index">
+                <v-list-item v-for="(rate, index) in creditsList" :key="index">
                     <v-list-item-title>{{ rate.name }}</v-list-item-title>
                     <v-list-item-subtitle
-                        >{{ rate.percent }}%</v-list-item-subtitle
+                        >{{ rate.rate }}%</v-list-item-subtitle
                     >
                 </v-list-item>
             </v-list>
@@ -25,14 +25,7 @@ export default {
     name: "CreditsView",
 
     data() {
-        return {
-            rates: [
-                { name: "Кредитная ставка 1", percent: 10 },
-                { name: "Кредитная ставка 2", percent: 12 },
-                { name: "Кредитная ставка 3", percent: 15 },
-                { name: "Кредитная ставка 4", percent: 18 },
-            ],
-        };
+        return {};
     },
     methods: {
         openCreateNewRate() {
@@ -40,6 +33,14 @@ export default {
                 path: `/credits/create`,
             });
         },
+    },
+    computed: {
+        creditsList() {
+            return this.$store.state.credits.creditList;
+        },
+    },
+    mounted() {
+        this.$store.dispatch("credits/getCredit");
     },
 };
 </script>

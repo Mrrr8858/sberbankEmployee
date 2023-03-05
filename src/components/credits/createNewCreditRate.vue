@@ -43,7 +43,10 @@ export default {
                 name: this.name,
                 rate: this.rate,
             };
-            console.log(payload);
+            await this.$store.dispatch("credits/createNewCreditRate", payload);
+            this.$router.push({
+                path: `/credits`,
+            });
         },
         required(v) {
             return !!v || "Field is required";

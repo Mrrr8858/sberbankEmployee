@@ -2,53 +2,37 @@ import axios from "axios";
 
 const endpoints = {
     client: {
-        getClientsList: "https://api.coindesk.com/v1/bpi/currentprice.json",
-        getClientsAccount: "",
-        getAccountHistory: "",
+        getClientsAccount: "/account/",
+        getAccountHistory: "/account/history/",
     },
-    employees: {
-        getEmployeesList: "",
-    },
+    employees: {},
     credits: {
-        createNewCreditRate: "",
-        getCredit: "",
+        createNewCreditRate: "/credit/create",
+        getCredit: "/credit",
     },
     user: {
-        createNewUser: "",
-        blockUser: "",
-        getUsersRole: "",
+        getUsersList: "/employee",
+        createNewUser: "/employee/create",
+        blockUser: "/employee/block/",
+        getUsersRole: "/employee/role",
     },
 };
 
 export default {
     client: {
-        //get
-        getClientsList: () =>
-            axios
-                .get(endpoints.client.getClientsList)
-                .then((response) => response.data)
-                .catch((error) => console.log(error)),
-        //post
         getClientsAccount: (payload) =>
             axios
-                .post(endpoints.client.getClientsAccount, payload)
+                .get(endpoints.client.getClientsAccount + payload)
                 .then((response) => response.data)
                 .catch((error) => console.log(error)),
         //post
         getAccountHistory: (payload) =>
             axios
-                .post(endpoints.client.getAccountHistory, payload)
+                .get(endpoints.client.getAccountHistory + payload)
                 .then((response) => response.data)
                 .catch((error) => console.log(error)),
     },
-    employees: {
-        //get
-        getEmployeesList: () =>
-            axios
-                .get(endpoints.employees.getEmployeesList)
-                .then((response) => response.data)
-                .catch((error) => console.log(error)),
-    },
+    employees: {},
     credits: {
         //get
         getCredit: () =>
@@ -64,6 +48,12 @@ export default {
                 .catch((error) => console.log(error)),
     },
     user: {
+        //get
+        getUsersList: () =>
+            axios
+                .get(endpoints.user.getUsersList)
+                .then((response) => response.data)
+                .catch((error) => console.log(error)),
         //post
         createNewUser: (payload) =>
             axios
@@ -73,7 +63,7 @@ export default {
         //post
         blockUser: (payload) =>
             axios
-                .post(endpoints.user.blockUser, payload)
+                .post(endpoints.user.blockUser + payload)
                 .then((response) => response.data)
                 .catch((error) => console.log(error)),
         //get

@@ -1,6 +1,6 @@
 <template>
     <v-card>
-        <v-card-title>Name</v-card-title>
+        <v-card-title>{{ userName }}</v-card-title>
 
         <v-card-text>
             <v-table>
@@ -12,9 +12,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in accounts" :key="item.name">
+                    <tr v-for="item in accountsList" :key="item.number">
                         <td>{{ item.number }}</td>
-                        <td>{{ item.value }}</td>
+                        <td>{{ item.balance }}</td>
                         <td>
                             <v-btn
                                 icon="mdi-eye"
@@ -34,25 +34,7 @@ export default {
     name: "ClientsAccount",
 
     data() {
-        return {
-            accounts: [
-                {
-                    id: 1,
-                    number: 123,
-                    value: 22,
-                },
-                {
-                    id: 2,
-                    number: 234,
-                    value: 333,
-                },
-                {
-                    id: 3,
-                    number: 345,
-                    value: 4444,
-                },
-            ],
-        };
+        return {};
     },
     methods: {
         openHistory(id) {
@@ -61,6 +43,20 @@ export default {
             });
         },
     },
-    mounted() {},
+    computed: {
+        userName() {
+            return (
+                this.$store.state.client.clientsAccount.name +
+                " " +
+                this.$store.state.client.clientsAccount.surname
+            );
+        },
+        accountsList() {
+            return this.$store.state.client.clientsAccount.accounts;
+        },
+    },
+    mounted() {
+        this.$store.dispatch("client/getClientsAccount", this.$route.params.id);
+    },
 };
 </script>
