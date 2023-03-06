@@ -7,12 +7,13 @@
             <v-text-field v-model="surname" label="Фамилия"></v-text-field>
 
             <v-text-field v-model="login" label="Login"></v-text-field>
+            <v-text-field v-model="password" label="Пароль"></v-text-field>
 
             <v-autocomplete
                 v-model="selectedRole"
                 :items="roles"
                 item-text="title"
-                item-value="id"
+                item-value="enum"
                 label="Роль"
             ></v-autocomplete>
 
@@ -39,13 +40,14 @@ export default {
             surname: "",
             name: "",
             login: "",
+            password: "",
             roles: [
                 {
-                    id: 1,
+                    enum: "CLIENT",
                     title: "Клиент",
                 },
                 {
-                    id: 2,
+                    enum: "EMPLOYEE",
                     title: "Сотрудник",
                 },
             ],
@@ -53,17 +55,19 @@ export default {
     },
     methods: {
         clear() {
-            (this.selectedRole = null),
-                (this.surname = ""),
-                (this.name = ""),
-                (this.login = "");
+            this.selectedRole = null;
+            this.surname = "";
+            this.name = "";
+            this.login = "";
+            this.password = "";
         },
         async create() {
             const payload = {
                 name: this.name,
                 surname: this.surname,
                 login: this.login,
-                roleId: this.selectedRole,
+                role: this.selectedRole,
+                password: this.password,
             };
             await this.$store.dispatch("user/createNewUser", payload);
             this.$router.push({

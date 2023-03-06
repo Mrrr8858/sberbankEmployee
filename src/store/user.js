@@ -31,6 +31,9 @@ export default {
         async blockUser(context, payload) {
             await api.user.blockUser(payload);
         },
+        async unblockUser(context, payload) {
+            await api.user.unblockUser(payload);
+        },
         async getUsersRole(context, payload) {
             await api.user.getUsersRole(payload);
         },

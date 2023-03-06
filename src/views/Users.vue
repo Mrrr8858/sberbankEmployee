@@ -32,7 +32,14 @@
                                 <v-btn
                                     icon="mdi-account-cancel"
                                     size="small"
+                                    v-if="item.status != 'Заблокирован'"
                                     @click="blockUser(item.id)"
+                                ></v-btn>
+                                <v-btn
+                                    icon="mdi-account-check"
+                                    size="small"
+                                    v-if="item.status == 'Заблокирован'"
+                                    @click="unblockUser(item.id)"
                                 ></v-btn>
                             </template>
                         </v-list-item>
@@ -52,7 +59,14 @@
                                 <v-btn
                                     icon="mdi-account-cancel"
                                     size="small"
+                                    v-if="item.status != 'Заблокирован'"
                                     @click="blockUser(item.id)"
+                                ></v-btn>
+                                <v-btn
+                                    icon="mdi-account-check"
+                                    size="small"
+                                    v-if="item.status == 'Заблокирован'"
+                                    @click="unblockUser(item.id)"
                                 ></v-btn>
                             </template>
                         </v-list-item>
@@ -83,8 +97,17 @@ export default {
                 path: `/client/account/${id}`,
             });
         },
-        blockUser(id) {
-            this.$store.dispatch("user/blockUser", Number(id));
+        async blockUser(id) {
+            this.$store.dispatch("user/blockUser", {
+                clientId: Number(id),
+                employeeId: 1004,
+            });
+        },
+        async unblockUser(id) {
+            await this.$store.dispatch("user/unblockUser", {
+                clientId: Number(id),
+                employeeId: 1004,
+            });
         },
     },
     computed: {

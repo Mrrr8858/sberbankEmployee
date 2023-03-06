@@ -19,7 +19,7 @@
                             <v-btn
                                 icon="mdi-eye"
                                 size="small"
-                                @click="openHistory(item.id)"
+                                @click="openHistory(item.id, item.number)"
                             ></v-btn>
                         </td>
                     </tr>
@@ -37,19 +37,16 @@ export default {
         return {};
     },
     methods: {
-        openHistory(id) {
+        openHistory(id, number) {
             this.$router.push({
                 path: `/client/account/history/${id}`,
+                query: { number: number },
             });
         },
     },
     computed: {
         userName() {
-            return (
-                this.$store.state.client.clientsAccount.name +
-                " " +
-                this.$store.state.client.clientsAccount.surname
-            );
+            return this.$store.state.client.clientsAccount.fullName;
         },
         accountsList() {
             return this.$store.state.client.clientsAccount.accounts;

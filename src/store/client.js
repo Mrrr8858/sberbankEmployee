@@ -7,29 +7,21 @@ export default {
     state: {
         clientList: [],
         clientsAccount: {
-            name: "",
-            surname: "",
+            fullName: "",
             accounts: [],
         },
-        accountHistory: {
-            accountNumber: "",
-            history: [],
-        },
+        accountHistory: [],
     },
 
     mutations: {
         setClientsAccount(state, data) {
-            state.clientsAccount.name = data.name;
-            state.clientsAccount.surname = data.surname;
+            state.clientsAccount.fullName = data.fullName;
             state.clientsAccount.accounts = data.accounts.map(
                 (row) => new AccountClient(row)
             );
         },
         setAccountHistory(state, data) {
-            state.accountHistory.accountNumber = data.number;
-            state.accountHistory.history = data.history.map(
-                (row) => new AccountHistory(row)
-            );
+            state.accountHistory = data.map((row) => new AccountHistory(row));
         },
     },
 

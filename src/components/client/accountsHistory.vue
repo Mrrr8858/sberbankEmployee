@@ -11,9 +11,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in historyList" :key="item.id">
-                        <td>{{ item.formateDate(item.date) }}</td>
-                        <td>{{ item.operation + item.amount }}</td>
+                    <tr v-for="item in historyList" :key="item.date">
+                        <td>{{ item.date }}</td>
+                        <td>{{ item.operationText() + item.amount }}</td>
                     </tr>
                 </tbody>
             </v-table>
@@ -49,10 +49,10 @@ export default {
     methods: {},
     computed: {
         historyList() {
-            return this.$store.state.client.accountHistory.history;
+            return this.$store.state.client.accountHistory;
         },
         numberAccount() {
-            return this.$store.state.client.accountHistory.accountNumber;
+            return this.$route.query.number;
         },
     },
     mounted() {

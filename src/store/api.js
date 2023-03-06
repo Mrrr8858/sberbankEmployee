@@ -13,11 +13,11 @@ const endpoints = {
     user: {
         getUsersList: "/employee",
         createNewUser: "/employee/create",
-        blockUser: "/employee/block/",
+        blockUser: "/employee/block",
+        unblockUser: "/employee/unblock",
         getUsersRole: "/employee/role",
     },
 };
-
 export default {
     client: {
         getClientsAccount: (payload) =>
@@ -63,7 +63,13 @@ export default {
         //post
         blockUser: (payload) =>
             axios
-                .post(endpoints.user.blockUser + payload)
+                .post(endpoints.user.blockUser, payload)
+                .then((response) => response.data)
+                .catch((error) => console.log(error)),
+        //post
+        unblockUser: (payload) =>
+            axios
+                .post(endpoints.user.unblockUser, payload)
                 .then((response) => response.data)
                 .catch((error) => console.log(error)),
         //get
