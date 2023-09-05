@@ -1,6 +1,5 @@
 import User from "@/model/User";
 import api from "./api";
-//import { toRaw } from "vue";
 export default {
     namespaced: true,
     state: {
@@ -8,6 +7,8 @@ export default {
         users: [],
         clientsList: [],
         employeesList: [],
+        token: localStorage.getItem("token") || "",
+        status: null,
     },
 
     mutations: {
@@ -18,6 +19,16 @@ export default {
         },
         setUsersRole(state, data) {
             state.roles = data;
+        },
+        auth_request: (state) => {
+            state.status = "loading";
+        },
+        auth_success: (state, token) => {
+            state.status = "success";
+            state.token = token;
+        },
+        auth_error: (state) => {
+            state.status = "error";
         },
     },
 
@@ -37,5 +48,29 @@ export default {
         async getUsersRole(context, payload) {
             await api.user.getUsersRole(payload);
         },
+        async auth(context) {
+            //(context, payload) {
+            localStorage.setItem("token", "123");
+            context.commit("auth_success", "123");
+            /* await api.user.auth(payload).then(() =>
+                this.$router.push({
+                    path: `/users`,
+                })
+            ); */
+        },
+        async logout() {
+            localStorage.removeItem("token");
+            //await api.user.logout();
+        },
+    },
+    getters: {
+        isAuthenticated(state) {
+            console.log(state.token);
+            if (state.token == "") {
+                return false;
+            }
+            return true;
+        },
+        authStatus: (state) => state.status,
     },
 };

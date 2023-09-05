@@ -17,6 +17,7 @@
             <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
             <v-toolbar-title>Страница сотрудника</v-toolbar-title>
+            <v-btn @click="logout">Выход</v-btn>
         </v-app-bar>
 
         <v-main>
@@ -40,6 +41,15 @@ export default {
                 },
             ],
         };
+    },
+    methods: {
+        async logout() {
+            await this.$store.dispatch("user/logout").then(() =>
+                this.$router.push({
+                    path: `/login`,
+                })
+            );
+        },
     },
 };
 </script>

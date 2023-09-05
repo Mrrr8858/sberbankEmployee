@@ -25,6 +25,11 @@
                             </v-list-item-title>
                             <template v-slot:append>
                                 <v-btn
+                                    icon="mdi-cash-register"
+                                    size="small"
+                                    @click="openClientsCreditsPayments(item.id)"
+                                ></v-btn>
+                                <v-btn
                                     icon="mdi-account-cash"
                                     size="small"
                                     @click="openClientsAccount(item.id)"
@@ -97,16 +102,21 @@ export default {
                 path: `/client/account/${id}`,
             });
         },
+        openClientsCreditsPayments(id) {
+            this.$router.push({
+                path: `/client/creditpayment/${id}`,
+            });
+        },
         async blockUser(id) {
             this.$store.dispatch("user/blockUser", {
                 clientId: Number(id),
-                employeeId: 1004,
+                employeeId: 1102,
             });
         },
         async unblockUser(id) {
             await this.$store.dispatch("user/unblockUser", {
                 clientId: Number(id),
-                employeeId: 1004,
+                employeeId: 1102,
             });
         },
     },

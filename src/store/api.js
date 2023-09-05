@@ -9,6 +9,9 @@ const endpoints = {
     credits: {
         createNewCreditRate: "/credit/create",
         getCredit: "/credit",
+        getCreditInfo: "/credit/",
+        getCreditRating: "/credit/rating/",
+        getCreditsList: "/credit/client/",
     },
     user: {
         getUsersList: "/employee",
@@ -46,6 +49,21 @@ export default {
                 .post(endpoints.credits.createNewCreditRate, payload)
                 .then((response) => response.data)
                 .catch((error) => console.log(error)),
+        getCreditInfo: (payload) =>
+            axios
+                .get(endpoints.credits.getCreditInfo + payload)
+                .then((response) => response.data)
+                .catch((error) => console.log(error)),
+        getCreditRating: (payload) =>
+            axios
+                .get(endpoints.credits.getCreditRating + payload)
+                .then((response) => response.data)
+                .catch((error) => console.log(error)),
+        getUsersCredits: (payload) =>
+            axios
+                .get(endpoints.credits.getCreditsList + payload)
+                .then((response) => response.data)
+                .catch((error) => console.log(error)),
     },
     user: {
         //get
@@ -77,6 +95,26 @@ export default {
             axios
                 .get(endpoints.user.getUsersRole)
                 .then((response) => response.data)
+                .catch((error) => console.log(error)),
+        auth: () =>
+            axios
+                .post(endpoints.user.auth)
+                .then((response) => {
+                    axios.defaults.headers.common["Authorization"] =
+                        response.data;
+
+                    localStorage.setItem("token", response.data);
+                    return response.data;
+                })
+                .catch((error) => console.log(error)),
+        logout: () =>
+            axios
+                .post(endpoints.user.auth)
+                .then((response) => {
+                    localStorage.removeItem("token");
+                    delete axios.defaults.headers.common["Authorization"];
+                    return response.data;
+                })
                 .catch((error) => console.log(error)),
     },
 };

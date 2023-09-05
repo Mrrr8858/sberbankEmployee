@@ -1,11 +1,35 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Users from "@/views/Users.vue";
+//import store from "@/store";
+
+/* const ifNotAuthenticated = (to, from, next) => {
+    if (store.getters.isAuthenticated) {
+        next();
+        return;
+    }
+    next("/");
+}; */
+
+/* const ifAuthenticated = (to, from, next) => {
+    if (store.getters.isAuthenticated) {
+        next();
+        return;
+    }
+    next("/login");
+}; */
 
 const routes = [
     {
         path: "/users",
         name: "users",
         component: Users,
+        //beforeEnter: ifAuthenticated,
+    },
+    {
+        path: "/login",
+        name: "login",
+        component: () => import("@/views/LogInPage.vue"),
+        //beforeEnter: ifNotAuthenticated,
     },
     {
         path: "/credits",
@@ -31,6 +55,11 @@ const routes = [
         path: "/client/account/history/:id",
         name: "accountsHistory",
         component: () => import("@/components/client/accountsHistory.vue"),
+    },
+    {
+        path: "/client/creditpayment/:id",
+        name: "clientsPayments",
+        component: () => import("@/components/client/clientsPayments.vue"),
     },
 ];
 

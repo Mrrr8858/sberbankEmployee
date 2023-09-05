@@ -1,24 +1,24 @@
 <template>
     <v-card>
-        <v-card-title> Создание кредитной ставки </v-card-title>
+        <v-card-title> Авторизация </v-card-title>
         <v-card-text>
             <v-form @submit.prevent="submitForm" v-model="form">
                 <v-text-field
-                    v-model.number="rate"
-                    label="Ставка"
-                    type="number"
+                    v-model="login"
+                    label="Логин"
                     max="50"
                     :rules="[required]"
                     required
                 ></v-text-field>
                 <v-text-field
-                    v-model="name"
-                    label="Название"
+                    v-model="password"
+                    label="Пароль"
+                    type="password"
                     required
                     :rules="[required]"
                 ></v-text-field>
                 <v-btn type="submit" :disabled="!form" color="primary"
-                    >Отправить</v-btn
+                    >Войти</v-btn
                 >
             </v-form>
         </v-card-text>
@@ -27,12 +27,12 @@
 
 <script>
 export default {
-    name: "CreateNewCreditRate",
+    name: "LogInPage",
 
     data() {
         return {
-            rate: null,
-            name: "",
+            login: null,
+            password: null,
             valid: true,
             form: false,
         };
@@ -40,13 +40,12 @@ export default {
     methods: {
         async submitForm() {
             const payload = {
-                name: this.name,
-                rate: this.rate,
-                employeeId: 1102, //пока так потом исправить
+                login: this.login,
+                password: this.password,
             };
-            await this.$store.dispatch("credits/createNewCreditRate", payload);
+            await this.$store.dispatch("user/auth", payload);
             this.$router.push({
-                path: `/credits`,
+                path: `/users`,
             });
         },
         required(v) {
